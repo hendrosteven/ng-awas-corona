@@ -1,0 +1,6 @@
+.imgBackground {
+    background-image: url('../assets/world.jpg');
+    background-size: 1024px 300px;
+    background-repeat: no-repeat;
+    background-position:center;
+  }
