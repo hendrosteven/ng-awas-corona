@@ -6,17 +6,21 @@ import { CoronaService } from './services/corona.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'Awas Corona';
 
-  indonesia: any;
+  indonesia: any= {
+    positif: 0,
+    meninggal: 0,
+    sembuh: 0
+  };
   province: any;
   global: any;
-  positive: any;
-  sembuh: any;
-  meninggal: any;
+  positive: any = 0;
+  sembuh: any = 0;
+  meninggal: any = 0;
 
-  constructor(private coronoService: CoronaService){
+  constructor(private coronoService: CoronaService) {
 
   }
 
@@ -29,31 +33,40 @@ export class AppComponent implements OnInit{
     this.loadGlobal()
   }
 
-  loadIndonesia(){
-
-  }
-
-  loadProvinsi(){
-
-  }
-
-  loadGlobal(){
-
-  }
-
-  loadPositif(){
-    this.coronoService.getDataGlobalPrositif().subscribe((results) => {
-      this.positive = results.value;
-      console.log(this.positive);
+  loadIndonesia() {
+    this.coronoService.getDataIndonesia().subscribe((results) => {
+      this.indonesia = results;
     });
   }
 
-  loadSembuh(){
-
+  loadProvinsi() {
+    this.coronoService.getDataPerProvinsi().subscribe((results) => {
+      this.province = results;
+    });
   }
 
-  loadMeninggal(){
+  loadGlobal() {
+    this.coronoService.getDataGlobal().subscribe((results) => {
+      this.global = results;
+    });
+  }
 
+  loadPositif() {
+    this.coronoService.getDataGlobalPrositif().subscribe((results) => {
+      this.positive = results.value;
+    });
+  }
+
+  loadSembuh() {
+    this.coronoService.getDataGlobalSembuh().subscribe((results) => {
+      this.sembuh = results.value;
+    });
+  }
+
+  loadMeninggal() {
+    this.coronoService.getDataGlobalMeninggal().subscribe((results) => {
+      this.meninggal = results.value;
+    });
   }
 
 
