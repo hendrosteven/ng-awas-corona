@@ -22,7 +22,8 @@
   <div class="container">
     <br>
     <h1 class="display-3 text-center" style="font-weight: bold;color: red;">AWAS CORONA</h1>
-    <p class="lead m-0 text-center" style="text-shadow: 1px 2px #F6F5F5;font-weight: bold;">Informasi Pandemi Virus Corona di Indonesia dan Global</p>
+    <p class="lead m-0 text-center" style="text-shadow: 1px 2px #F6F5F5;font-weight: bold;">Informasi Pandemi Virus
+      Corona di Indonesia dan Global</p>
   </div>
 </div>
 
@@ -77,13 +78,103 @@
           <div class="d-flex">
             <div class="text-white">
               <h5 class="mb-0 number-font">INDONESIA</h5>
-              <p class="text-white mb-0"><b> {{ indonesia.total_cases }}</b> POSITIF<BR> <b>{{ indonesia.total_recovered }}</b> SEMBUH<BR> <b>{{ indonesia.total_deaths }}</b> MENINGGAL</p>
+              <p class="text-white mb-0"><b> {{ indonesia.total_cases }}</b> POSITIF<BR>
+                <b>{{ indonesia.total_recovered }}</b> SEMBUH<BR> <b>{{ indonesia.total_deaths }}</b> MENINGGAL</p>
             </div>
-            <div class="ml-auto"> <img src="../assets/indonesia.png" width="50" height="50"
-                alt="Positif"> </div>
+            <div class="ml-auto"> <img src="../assets/indonesia.png" width="50" height="50" alt="Positif"> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p></p>
+
+  <div class="row row-cards">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-14">
+      <div class="card">
+        <div class="card-header">
+          <p class="card-title tableTitle">Histori Kasus Virus Corona di Indonesia (Update setiap 10 menit)
+          <button type="button" class="btn btn-success float-right" (click)="loadHistoryIndonesia()"><i class="fas fa-sync-alt"></i></button></p>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive tableFixHead" style="height: 400px;">
+            <table class="table table-bordered table-hover mb-0 text-nowrap css-serial">
+              <thead>
+                <tr>
+                  <th>NO.</th>
+                  <th>Tanggal</th>
+                  <th>Positif</th>
+                  <th>Sembuh</th>
+                  <th>Meninggal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of histories;let i = index">
+                  <td>{{i}}</td>
+                  <td>{{ data.record_date | date:'yyyy-MM-dd hh:mm:ss' }}</td>
+                  <td>{{ data.total_cases }}</td>
+                  <td>{{ data.total_recovered }}</td>
+                  <td>{{ data.total_deaths }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p></p>
+
+  <div class="row row-cards">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-14">
+      <div class="card">
+        <div class="card-header">
+          <p class="card-title tableTitle">Kasus Virus Corona Global (per
+            {{ allCountries.lastChecked | date:'longDate' }})</p>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive tableFixHead" style="height: 400px;">
+            <table class="table table-bordered table-hover mb-0 text-nowrap css-serial">
+              <thead>
+                <tr>
+                  <th>NO.</th>
+                  <th>Tanggal</th>
+                  <th>Negara</th>
+                  <th>Province</th>
+                  <th>Positif</th>
+                  <th>Sembuh</th>
+                  <th>Meninggal</th>                 
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of allCountries.covid19Stats;let i = index">
+                  <td>{{i}}</td>
+                  <td>{{ data.lastUpdate | date}}</td>
+                  <td>{{ data.country }}</td>
+                  <td>{{ data.province }}</td>
+                  <td>{{ data.confirmed }}</td>
+                  <td>{{ data.recovered }}</td>
+                  <td>{{ data.deaths }}</td>                  
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+<!-- Footer -->
+<footer class="page-footer font-small blue">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">Build with <i class="fab fa-angular" style="font-size: 20px;color:red;"></i> by 
+    <a href="https://github.com/hendrosteven"> Hendro Steven</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->

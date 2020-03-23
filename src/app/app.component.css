@@ -4,3 +4,14 @@
     background-repeat: no-repeat;
     background-position:center;
   }
+
+.tableTitle{
+  font-weight: bold;
+}
+
+.tableFixHead          { overflow-y: auto; height: 100px; }
+.tableFixHead thead th { position: sticky; top: 0; }
+
+th {
+  background-color: white;
+} 
