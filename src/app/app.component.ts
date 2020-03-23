@@ -10,64 +10,40 @@ export class AppComponent implements OnInit {
   title = 'Awas Corona';
 
   indonesia: any= {
-    positif: 0,
-    meninggal: 0,
-    sembuh: 0
+    total_cases: 0,
+    total_deaths: 0,
+    total_recovered: 0,
+    record_date: 0
   };
-  province: any;
-  global: any;
-  positive: any = 0;
-  sembuh: any = 0;
-  meninggal: any = 0;
+  global: any = {
+    total_cases: 0,
+    total_deaths: 0,
+    total_recovered: 0,
+    statistic_taken_at: 0
+  }
+
 
   constructor(private coronoService: CoronaService) {
 
   }
 
   ngOnInit() {
-    this.loadPositif();
-    this.loadMeninggal();
-    this.loadSembuh();
     this.loadIndonesia();
-    this.loadProvinsi();
     this.loadGlobal()
   }
 
   loadIndonesia() {
     this.coronoService.getDataIndonesia().subscribe((results) => {
-      this.indonesia = results;
+      console.log(results.latest_stat_by_country[0]);
+      this.indonesia = results.latest_stat_by_country[0];
     });
   }
 
-  loadProvinsi() {
-    this.coronoService.getDataPerProvinsi().subscribe((results) => {
-      this.province = results;
-    });
-  }
 
   loadGlobal() {
     this.coronoService.getDataGlobal().subscribe((results) => {
       this.global = results;
     });
   }
-
-  loadPositif() {
-    this.coronoService.getDataGlobalPrositif().subscribe((results) => {
-      this.positive = results.value;
-    });
-  }
-
-  loadSembuh() {
-    this.coronoService.getDataGlobalSembuh().subscribe((results) => {
-      this.sembuh = results.value;
-    });
-  }
-
-  loadMeninggal() {
-    this.coronoService.getDataGlobalMeninggal().subscribe((results) => {
-      this.meninggal = results.value;
-    });
-  }
-
 
 }

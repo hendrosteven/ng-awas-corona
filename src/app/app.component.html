@@ -34,7 +34,7 @@
           <div class="d-flex">
             <div class="text-white">
               <p class="text-white mb-0">TOTAL POSITIF</p>
-              <h1 class="mb-0 number-font">{{ positive }}</h1>
+              <h1 class="mb-0 number-font">{{ global.total_cases }}</h1>
               <p class="text-white mb-0">ORANG</p>
             </div>
             <div class="ml-auto"> <i class="fas fa-frown" style="font-size: 40pt;color: aliceblue;"></i> </div>
@@ -48,7 +48,7 @@
           <div class="d-flex">
             <div class="text-white">
               <p class="text-white mb-0">TOTAL SEMBUH</p>
-              <h1 class="mb-0 number-font">{{ sembuh }}</h1>
+              <h1 class="mb-0 number-font">{{ global.total_recovered }}</h1>
               <p class="text-white mb-0">ORANG</p>
             </div>
             <div class="ml-auto"> <i class="fas fa-smile-beam" style="font-size: 40pt;color: aliceblue;"></i></div>
@@ -62,7 +62,7 @@
           <div class="d-flex">
             <div class="text-white">
               <p class="text-white mb-0">TOTAL MENINGGAL</p>
-              <h1 class="mb-0 number-font">{{ meninggal }}</h1>
+              <h1 class="mb-0 number-font">{{ global.total_deaths }}</h1>
               <p class="text-white mb-0">ORANG</p>
             </div>
             <div class="ml-auto"> <i class="fas fa-sad-cry" style="font-size: 40pt;color: aliceblue;"></i>
@@ -77,7 +77,7 @@
           <div class="d-flex">
             <div class="text-white">
               <h5 class="mb-0 number-font">INDONESIA</h5>
-              <p class="text-white mb-0"><b> {{ indonesia.positif }}</b> POSITIF<BR> <b>{{ indonesia.sembuh }}</b> SEMBUH<BR> <b>{{ indonesia.meninggal }}</b> MENINGGAL</p>
+              <p class="text-white mb-0"><b> {{ indonesia.total_cases }}</b> POSITIF<BR> <b>{{ indonesia.total_recovered }}</b> SEMBUH<BR> <b>{{ indonesia.total_deaths }}</b> MENINGGAL</p>
             </div>
             <div class="ml-auto"> <img src="../assets/indonesia.png" width="50" height="50"
                 alt="Positif"> </div>
