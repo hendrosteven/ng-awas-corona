@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { CoronaService } from './services/corona.service';
 import { GoogleAnalyticsService } from './services/google-analytics.service';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { GoogleAnalyticsService } from './services/google-analytics.service';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ],
   providers: [CoronaService, GoogleAnalyticsService],
   bootstrap: [AppComponent]

@@ -21,16 +21,16 @@
 <div class="jumbotron imgBackground" style="height: 250px;">
   <div class="container">
     <br>
-    <h1 class="display-3 text-center" style="font-weight: bold;color: red;">AWAS CORONA</h1>
+    <p class="display-4 text-center" style="font-weight: bold;color: red;">AWAS CORONA</p>
     <p class="lead m-0 text-center" style="text-shadow: 1px 2px #F6F5F5;font-weight: bold;">Update Informasi Pandemi Virus
-      Corona di Indonesia dan Global</p>
+      Corona di Indonesia dan Global</p><p></p>
   </div>
 </div>
 
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-      <div class="card bg-danger img-card box-primary-shadow">
+      <div class="card bg-warning img-card box-primary-shadow">
         <div class="card-body">
           <div class="d-flex">
             <div class="text-white">
@@ -58,7 +58,7 @@
       </div>
     </div>
     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-      <div class="card  bg-warning img-card box-success-shadow">
+      <div class="card  bg-danger img-card box-success-shadow">
         <div class="card-body">
           <div class="d-flex">
             <div class="text-white">
@@ -93,7 +93,32 @@
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-14">
       <div class="card">
         <div class="card-header">
-          <p class="card-title tableTitle">Histori Kasus Virus Corona di Indonesia (Update setiap 10 menit)
+          <p class="card-title tableTitle">Line Chart Histori Kasus Virus Corona di Indonesia (Update setiap 10 menit)
+        </div>
+        <div class="card-body">
+          <div class="chart-wrapper">
+            <canvas baseChart 
+                [datasets]="lineChartData" 
+                [labels]="lineChartLabels" 
+                [options]="lineChartOptions"
+                [colors]="lineChartColors" 
+                [legend]="lineChartLegend" 
+                [chartType]="lineChartType" 
+                [plugins]="lineChartPlugins">
+            </canvas>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p></p>
+
+  <!-- <div class="row row-cards">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-14">
+      <div class="card">
+        <div class="card-header">
+          <p class="card-title tableTitle">Tabel Histori Kasus Virus Corona di Indonesia (Update setiap 10 menit)
           <button type="button" class="btn btn-success float-right" (click)="loadHistoryIndonesia()"><i class="fas fa-sync-alt"></i></button></p>
         </div>
         <div class="card-body">
@@ -102,16 +127,16 @@
               <thead>
                 <tr>
                   <th>NO.</th>
-                  <th>Tanggal</th>
+                  <th>Tanggal Record</th>
                   <th>Positif</th>
                   <th>Sembuh</th>
                   <th>Meninggal</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let data of histories;let i = index">
-                  <td>{{i}}</td>
-                  <td>{{ data.record_date | date:'yyyy-MM-dd hh:mm:ss' }}</td>
+                <tr *ngFor="let data of historiesFilter;let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{ data.record_date | date:'yyyy-MM-dd HH:mm:ss' }}</td>
                   <td>{{ data.total_cases }}</td>
                   <td>{{ data.total_recovered }}</td>
                   <td>{{ data.total_deaths }}</td>
@@ -122,7 +147,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <p></p>
 
@@ -131,7 +156,7 @@
       <div class="card">
         <div class="card-header">
           <p class="card-title tableTitle">Kasus Virus Corona Global (per
-            {{ allCountries.lastChecked | date:'longDate' }})</p>
+            {{ allCountries.lastChecked | date:'yyyy-MM-dd HH:mm:ss' }})</p>
         </div>
         <div class="card-body">
           <div class="table-responsive tableFixHead" style="height: 400px;">
@@ -139,7 +164,7 @@
               <thead>
                 <tr>
                   <th>NO.</th>
-                  <th>Tanggal</th>
+                  <th>Tanggal Record</th>
                   <th>Negara</th>
                   <th>Province</th>
                   <th>Positif</th>
@@ -149,8 +174,8 @@
               </thead>
               <tbody>
                 <tr *ngFor="let data of allCountries.covid19Stats;let i = index">
-                  <td>{{i}}</td>
-                  <td>{{ data.lastUpdate | date}}</td>
+                  <td>{{i+1}}</td>
+                  <td>{{ data.lastUpdate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                   <td>{{ data.country }}</td>
                   <td>{{ data.province }}</td>
                   <td>{{ data.confirmed }}</td>

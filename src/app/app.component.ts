@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CoronaService } from './services/corona.service';
-import { ThrowStmt } from '@angular/compiler';
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Color, Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { ThrowStmt } from '@angular/compiler';
 export class AppComponent implements OnInit {
   title = 'Awas Corona';
 
-  indonesia: any= {
+  indonesia: any = {
     total_cases: 0,
     total_deaths: 0,
     total_recovered: 0,
@@ -25,11 +26,52 @@ export class AppComponent implements OnInit {
   }
 
   allCountries: any = {
-    lastChecked : 0,
+    lastChecked: 0,
     covid19Stats: []
   };
 
   histories: any[] = [];
+  historiesFilter: any[] = [];
+
+  lineChartData: ChartDataSets[] = [
+    {data:[], label: 'Positif Corona'}
+  ];
+  lineChartLabels: Label[] = [];
+
+  lineChartOptions = {
+    responsive: true,
+  };
+
+  lineChartColors: Color[] = [
+    {
+      backgroundColor: 'rgba(0, 177, 5, 1)',
+      borderColor: 'rgba(0, 177, 5, 1)',
+      pointBackgroundColor: '#037F34',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+    },
+    {
+      backgroundColor: 'rgba(255, 51, 66 , 1)',
+      borderColor: 'rgba(255, 51, 66 , 1)',
+      pointBackgroundColor: '#FF5733',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+    },
+    {
+      backgroundColor: 'rgba(255, 195, 0, 1)',
+      borderColor: 'rgba(255, 195, 0, 1)',
+      pointBackgroundColor: '#EA7901',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+    }
+  ];
+
+  lineChartLegend = true;
+  lineChartPlugins = [];
+  lineChartType = 'line';
 
   constructor(private coronoService: CoronaService) {
 
@@ -39,7 +81,7 @@ export class AppComponent implements OnInit {
     this.loadIndonesia();
     this.loadGlobal()
     this.loadHistoryIndonesia();
-    this.loadAllCountry();    
+    this.loadAllCountry();
   }
 
   loadIndonesia() {
@@ -55,16 +97,56 @@ export class AppComponent implements OnInit {
     });
   }
 
-  loadAllCountry(){
-    this.coronoService.getAllCountry().subscribe((results) =>{
+  loadAllCountry() {
+    this.coronoService.getAllCountry().subscribe((results) => {
       this.allCountries = results.data;
     })
   }
 
-  loadHistoryIndonesia(){
-    this.coronoService.getHistoryIndonesia().subscribe((results)=>{
+  loadHistoryIndonesia() {
+    this.coronoService.getHistoryIndonesia().subscribe((results) => {
       this.histories = results.stat_by_country;
+
+      var tempDate = null;
+      var tempHistory: any;
+      var lineChartDataPositiveTemp: any[] = [];
+      var lineChartDataMeninggalTemp: any[] = [];
+      var lineChartDataSembuh: any[] = [];
+      this.histories.forEach((item) => {
+        if (tempDate == null) {
+          tempDate = item.record_date.split(" ")[0];
+          tempHistory = item;
+        }
+        if (tempDate !== item.record_date.split(" ")[0]) {
+          this.historiesFilter.push(tempHistory);
+          lineChartDataPositiveTemp.push(tempHistory.total_cases);
+          lineChartDataMeninggalTemp.push(tempHistory.total_deaths);
+          lineChartDataSembuh.push(tempHistory.total_recovered);
+          this.lineChartLabels.push(tempHistory.record_date.split(" ")[0]);
+          tempDate = item.record_date.split(" ")[0];
+        }
+        tempHistory = item;
+      });
+      this.historiesFilter.push(this.histories[this.histories.length - 1]);
+      var dataPositive = {
+        data: lineChartDataPositiveTemp,
+        label: 'Positif Corona'
+      };
+      var dataMeninggal = {
+        data: lineChartDataMeninggalTemp,
+        label: 'Meninggal'
+      }
+      var dataSembuh = {
+        data: lineChartDataSembuh,
+        label: 'Sembuh'
+      }
+
+      this.lineChartData = [];
+      this.lineChartData.push(dataSembuh);
+      this.lineChartData.push(dataMeninggal);
+      this.lineChartData.push(dataPositive);     
+      
     });
   }
-  
+
 }
