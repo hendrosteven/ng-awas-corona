@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { CoronaService } from './services/corona.service';
+import { GoogleAnalyticsService } from './services/google-analytics.service';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { CoronaService } from './services/corona.service';
     HttpClientModule,
     FormsModule
   ],
-  providers: [CoronaService],
+  providers: [CoronaService, GoogleAnalyticsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
