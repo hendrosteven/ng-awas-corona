@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
   historiesFilter: any[] = [];
 
   lineChartData: ChartDataSets[] = [
-    {data:[], label: 'Positif Corona'}
+    {data:[], label: 'Sembuh'}
   ];
   lineChartLabels: Label[] = [];
 
