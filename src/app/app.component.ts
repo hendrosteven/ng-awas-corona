@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
 
   lineChartOptions = {
     responsive: true,
+    maintainAspectRatio: false
   };
 
   lineChartColors: Color[] = [
