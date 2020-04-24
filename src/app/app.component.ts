@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
 import { CoronaService } from './services/corona.service';
-import { ChartDataSets, ChartOptions } from 'chart.js';
+import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 
 @Component({
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
   historiesFilter: any[] = [];
 
   lineChartData: ChartDataSets[] = [
-    {data:[], label: 'Sembuh'}
+    { data: [], label: 'Sembuh' }
   ];
   lineChartLabels: Label[] = [];
 
@@ -120,9 +120,9 @@ export class AppComponent implements OnInit {
         }
         if (tempDate !== item.record_date.split(" ")[0]) {
           this.historiesFilter.push(tempHistory);
-          lineChartDataPositiveTemp.push(tempHistory.total_cases);
-          lineChartDataMeninggalTemp.push(tempHistory.total_deaths);
-          lineChartDataSembuh.push(tempHistory.total_recovered);
+          lineChartDataPositiveTemp.push(parseFloat(tempHistory.total_cases.replace(",", "")));
+          lineChartDataMeninggalTemp.push(parseFloat(tempHistory.total_deaths.replace(",", "")));
+          lineChartDataSembuh.push(parseFloat(tempHistory.total_recovered.replace(",", "")));
           this.lineChartLabels.push(tempHistory.record_date.split(" ")[0]);
           tempDate = item.record_date.split(" ")[0];
         }
@@ -142,12 +142,14 @@ export class AppComponent implements OnInit {
         label: 'Sembuh'
       }
 
+     
+
       this.lineChartData = [];
       this.lineChartData.push(dataSembuh);
       this.lineChartData.push(dataMeninggal);
-      this.lineChartData.push(dataPositive);     
-      
+      this.lineChartData.push(dataPositive);
+
+      console.log(this.lineChartData);
     });
   }
-
 }
