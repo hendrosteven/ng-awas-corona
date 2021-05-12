@@ -22,7 +22,7 @@
     "@angular/router": "~8.2.14",
     "@popperjs/core": "^2.1.0",
     "bootstrap": "^4.4.1",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "express": "^4.17.1",
     "jquery": "^3.4.1",
     "ng2-charts": "^2.3.0",
